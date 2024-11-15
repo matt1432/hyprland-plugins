@@ -210,6 +210,9 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     static auto P2 = HyprlandAPI::registerCallbackDynamic(PHANDLE, "swipeBegin", [](void* self, SCallbackInfo& info, std::any data) { swipeBegin(self, info, data); });
     static auto P3 = HyprlandAPI::registerCallbackDynamic(PHANDLE, "swipeEnd", [](void* self, SCallbackInfo& info, std::any data) { swipeEnd(self, info, data); });
     static auto P4 = HyprlandAPI::registerCallbackDynamic(PHANDLE, "swipeUpdate", [](void* self, SCallbackInfo& info, std::any data) { swipeUpdate(self, info, data); });
+    static auto P5 = HyprlandAPI::registerCallbackDynamic(PHANDLE, "hyprgrass:swipeStart", [](void* self, SCallbackInfo& info, std::any data) { swipeBegin(self, info, data); });
+    static auto P6 = HyprlandAPI::registerCallbackDynamic(PHANDLE, "hyprgrass:swipeEnd", [](void* self, SCallbackInfo& info, std::any data) { swipeEnd(self, info, data); });
+    static auto P7 = HyprlandAPI::registerCallbackDynamic(PHANDLE, "hyprgrass:swipeUpdate", [](void* self, SCallbackInfo& info, std::any data) { swipeUpdate(self, info, data); });
 
     HyprlandAPI::addDispatcher(PHANDLE, "hyprexpo:expo", onExpoDispatcher);
 
