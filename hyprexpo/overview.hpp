@@ -5,6 +5,9 @@
 #include "globals.hpp"
 #include <hyprland/src/desktop/DesktopTypes.hpp>
 #include <hyprland/src/render/Framebuffer.hpp>
+#include <hyprutils/memory/SharedPtr.hpp>
+#include <hyprutils/memory/UniquePtr.hpp>
+using namespace Hyprutils::Memory;
 #include <hyprland/src/helpers/AnimatedVariable.hpp>
 #include <hyprland/src/event/EventBus.hpp>
 #include <vector>
@@ -54,7 +57,7 @@ class COverview {
     bool       damageDirty = false;
 
     struct SWorkspaceImage {
-        CFramebuffer fb;
+        SP<Render::IFramebuffer> fb;
         int64_t      workspaceID = -1;
         PHLWORKSPACE pWorkspace;
         CBox         box;
