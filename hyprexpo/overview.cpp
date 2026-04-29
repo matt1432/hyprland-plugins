@@ -5,7 +5,7 @@
 #include <hyprland/src/config/shared/animation/AnimationTree.hpp>
 #include <hyprutils/string/ConstVarList.hpp>
 using namespace Hyprutils::String;
-#define private public
+#define private   public
 #define protected public
 #include <hyprland/src/render/Renderer.hpp>
 #include <hyprland/src/Compositor.hpp>
@@ -26,10 +26,9 @@ static void damageMonitor(WP<Hyprutils::Animation::CBaseAnimatedVariable> thispt
 }
 
 COverview::~COverview() {
-    
     images.clear(); // otherwise we get a vram leak
     Cursor::overrideController->unsetOverride(Cursor::CURSOR_OVERRIDE_UNKNOWN);
-     // (pMonitor.lock());
+    // (pMonitor.lock());
 }
 
 COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn_), swipe(swipe_) {
@@ -47,8 +46,8 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
     BG_COLOR    = **PCOL;
 
     // process the method
-    bool     methodCenter  = true;
-    int      methodStartID = pMonitor->activeWorkspaceID();
+    bool          methodCenter  = true;
+    int           methodStartID = pMonitor->activeWorkspaceID();
     CConstVarList method{*PMETHOD, 0, 's', true};
     if (method.size() < 2)
         Log::logger->log(Log::ERR, "[he] invalid workspace_method");
@@ -126,8 +125,6 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
         pMonitor->m_activeWorkspace = startedOn;
     }
 
-    
-
     Vector2D tileSize       = pMonitor->m_size / SIDE_LENGTH;
     Vector2D tileRenderSize = (pMonitor->m_size - Vector2D{GAP_WIDTH * pMonitor->m_scale, GAP_WIDTH * pMonitor->m_scale} * (SIDE_LENGTH - 1)) / SIDE_LENGTH;
     CBox     monbox{0, 0, tileSize.x * 2, tileSize.y * 2};
@@ -147,7 +144,8 @@ COverview::COverview(PHLWORKSPACE startedOn_, bool swipe_) : startedOn(startedOn
 
     for (size_t i = 0; i < (size_t)(SIDE_LENGTH * SIDE_LENGTH); ++i) {
         COverview::SWorkspaceImage& image = images[i];
-        image.fb = makeShared<Render::GL::CGLFramebuffer>(); image.fb->alloc(monbox.w, monbox.h, PMONITOR->m_output->state->state().drmFormat);
+        image.fb                          = makeShared<Render::GL::CGLFramebuffer>();
+        image.fb->alloc(monbox.w, monbox.h, PMONITOR->m_output->state->state().drmFormat);
 
         CRegion fakeDamage{0, 0, INT16_MAX, INT16_MAX};
         g_pHyprRenderer->beginRender(PMONITOR, fakeDamage, Render::RENDER_MODE_FULL_FAKE, nullptr, image.fb);
@@ -263,8 +261,6 @@ void COverview::redrawID(int id, bool forcelowres) {
 
     blockOverviewRendering = true;
 
-    
-
     id = std::clamp(id, 0, SIDE_LENGTH * SIDE_LENGTH);
 
     Vector2D tileSize       = pMonitor->m_size / SIDE_LENGTH;
@@ -281,7 +277,8 @@ void COverview::redrawID(int id, bool forcelowres) {
 
     if (image.fb->m_size != monbox.size()) {
         image.fb->release();
-        image.fb = makeShared<Render::GL::CGLFramebuffer>(); image.fb->alloc(monbox.w, monbox.h, pMonitor->m_output->state->state().drmFormat);
+        image.fb = makeShared<Render::GL::CGLFramebuffer>();
+        image.fb->alloc(monbox.w, monbox.h, pMonitor->m_output->state->state().drmFormat);
     }
 
     CRegion fakeDamage{0, 0, INT16_MAX, INT16_MAX};

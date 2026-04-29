@@ -58,9 +58,9 @@ class COverview {
 
     struct SWorkspaceImage {
         SP<Render::IFramebuffer> fb;
-        int64_t      workspaceID = -1;
-        PHLWORKSPACE pWorkspace;
-        CBox         box;
+        int64_t                  workspaceID = -1;
+        PHLWORKSPACE             pWorkspace;
+        CBox                     box;
     };
 
     Vector2D                     lastMousePosLocal = Vector2D{};
